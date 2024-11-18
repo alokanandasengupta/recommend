@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import os
 
 # Custom CSS for better UI
 def add_custom_css():
@@ -44,7 +45,8 @@ def add_custom_css():
 # Cache the data loading
 @st.cache_data
 def load_data():
-    file_path =https://github.com/alokanandasengupta/recommend/blob/main/Updated_Movie_Data_with_Keywords4.csv
+    file_path = "Updated_Movie_Data_with_Keywords4.csv"
+    
     try:
         df = pd.read_csv(file_path)
         if df.empty:
@@ -104,8 +106,8 @@ def recommend_movies(movie_title, dataset, num_recommendations=5):
     genre_column = next((col for col in dataset.columns if 'genre ' in col.lower()), 'Primary Genre')
     director_column = next((col for col in dataset.columns if 'director' in col.lower()), 'Director')
     year_column = next((col for col in dataset.columns if 'year' in col.lower()), 'Theatrical Release Year')
-    synopsis_column = next((col for col in dataset.columns if 'syn opsis' in col.lower()), 'Synopsis')
-    keywords_column = next((col for col in dataset.columns if 'keywords' in col.lower()), 'Keywords')
+    synopsis_column = next((col for col in dataset.columns if 'synopsis' in col.lower()), 'Synopsis')
+    keywords_column = next((col for col in dataset.columns if 'keyword' in col.lower()), 'Keywords')
     cast_column = next((col for col in dataset.columns if 'cast' in col.lower()), 'Cast')
 
     selected_movie = dataset[dataset[name_column] == movie_title]
@@ -183,7 +185,7 @@ def main():
                 
                 st.subheader("📽️ Recommendations")
                 for rec in recommendations:
-                    st.write(f"**Title:** {rec['Name']} (Similarity Score: {rec['Overall Similarity']:.2f})")
+                    st.write(f"**Title:** {rec['Name']} (Similarity Score: {rec['Overall Similarity']:.2f })")
                     st.write(f"**Genre:** {rec['Primary Genre']}")
                     st.write(f"**Director:** {rec['Director']}")
                     st.markdown("---")
