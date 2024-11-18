@@ -44,8 +44,7 @@ def add_custom_css():
 # Cache the data loading
 @st.cache_data
 def load_data():
-    file_path = r"C:\Users\xyz\Downloads\.ipynb_checkpoints\recommendations trial\template\Updated_Movie_Data_with_Keywords4.csv"
-    
+    file_path =https://github.com/alokanandasengupta/recommend/blob/main/Updated_Movie_Data_with_Keywords4.csv
     try:
         df = pd.read_csv(file_path)
         if df.empty:
