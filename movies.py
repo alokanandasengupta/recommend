@@ -250,6 +250,7 @@ def main():
         # Feedback section
         st.markdown("### 📝 Feedback")
         st.write("Please take a moment to share your thoughts—they’ll guide me in creating an even better experience for everyone.")
+        st.write("P.S: Its the first trial model so if you notice anything incorrect that i dont then drop that feedback by too!")
         st.markdown("[Click here to provide feedback](https://forms.gle/n5SR52xR7MrmMt9k7)")
 
 if __name__ == "__main__":
