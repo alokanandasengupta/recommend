@@ -16,6 +16,7 @@ def add_custom_css():
             padding: 20px;
             margin: 10px 0;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center; /* Center the content */
         }
         .similarity-score {
             color: #0068c9;
@@ -48,14 +49,10 @@ def load_data():
     file_path = r"C:\Users\xyz\Downloads\.ipynb_checkpoints\recommendations trial\template\Updated_Movie_Data_with_Keywords4.csv"
     
     try:
-        # Try to read the CSV file
         df = pd.read_csv(file_path)
-        
-        # Verify the dataframe is not empty
         if df.empty:
             st.error("The loaded dataset is empty.")
             return None
-        
         return df
     
     except Exception as e:
@@ -104,17 +101,15 @@ def calculate_rating_similarity(rating1, rating2):
         return 0
 
 def recommend_movies(movie_title, dataset, num_recommendations=5):
-    # Normalize column names by stripping whitespace
     dataset.columns = [col.strip() for col in dataset.columns]
     
-    # Check column names to handle potential variations
     rating_column = next((col for col in dataset.columns if 'rating' in col.lower()), None)
     name_column = next((col for col in dataset.columns if 'name' in col.lower()), 'Name')
     genre_column = next((col for col in dataset.columns if 'genre ' in col.lower()), 'Primary Genre')
     director_column = next((col for col in dataset.columns if 'director' in col.lower()), 'Director')
     year_column = next((col for col in dataset.columns if 'year' in col.lower()), 'Theatrical Release Year')
     synopsis_column = next((col for col in dataset.columns if 'synopsis' in col.lower()), 'Synopsis')
-    keywords_column = next((col for col in dataset.columns if 'keyword' in col.lower()), 'keywords4')
+    keywords_column = next ((col for col in dataset.columns if 'keyword' in col.lower()), 'keywords4')
     cast_column = next((col for col in dataset.columns if 'cast' in col.lower()), 'Cast')
     age_rating_column = next((col for col in dataset.columns if 'age' in col.lower()), 'Age Rating')
 
@@ -134,7 +129,6 @@ def recommend_movies(movie_title, dataset, num_recommendations=5):
         genre_sim = calculate_genre_similarity(selected_movie[genre_column], movie[genre_column])
         director_sim = calculate_director_similarity(selected_movie[director_column], movie[director_column])
         
-        # Added safety checks for optional columns
         keyword_sim = calculate_keyword_similarity(
             selected_movie.get(keywords_column, ''), 
             movie.get(keywords_column, '')
@@ -237,15 +231,15 @@ def main():
                     # Display recommendations
                     st.markdown("### 📽️ Recommendations")
                     for rec in recommendations:
+                        st.markdown(f"<div class='movie-card'>", unsafe_allow_html=True)
                         st.markdown(f"**Title:** {rec['Name']}")
                         st.write(f"**Genre:** {rec['Primary Genre']}")
                         st.write(f"**Director:** {rec['Director']}")
                         st.write(f"**Release Year:** {rec['Theatrical Release Year']}")
                         st.write(f"**Rating:** {rec.get('Age Rating', 'N/A')}")
                         st.write(f"**Synopsis:** {rec['Synopsis']}")
+                        st.markdown("</div>", unsafe_allow_html=True)
                         st.markdown("---")
-
-       
 
         # Feedback section
         st.markdown("### 📝 Feedback")
