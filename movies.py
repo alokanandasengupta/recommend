@@ -45,7 +45,7 @@ def add_custom_css():
 # Cache the data loading
 @st.cache_data
 def load_data():
-    file_path = r"C:\Users\xyz\Downloads\.ipynb_checkpoints\recommendations trial\template\Updated_Movie_Data_with_Keywords4.csv"
+    file_path = Updated_Movie_Data_with_Keywords4.csv
     
     try:
         # Try to read the CSV file
