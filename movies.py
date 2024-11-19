@@ -231,7 +231,7 @@ def main():
                     st.write(f"**Genre:** {selected_movie_details ['Primary Genre']}")
                     st.write(f"**Director:** {selected_movie_details['Director']}")
                     st.write(f"**Release Year:** {selected_movie_details['Theatrical Release Year']}")
-                    st.write(f"**Rating:** {selected_movie_details.get('Rating Score', 'N/A')}")
+                    st.write(f"**Rating:** {selected_movie_details.get('Age Rating', 'N/A')}")
                     st.write(f"**Synopsis:** {selected_movie_details['Synopsis']}")
 
                     # Display recommendations
